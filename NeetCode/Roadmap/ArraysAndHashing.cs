@@ -80,4 +80,32 @@ public static class ArraysAndHashing
             .Select(entry => entry.Key)
             .ToArray();
     }
+    
+    // https://leetcode.com/problems/product-of-array-except-self/description/
+    public static int[] ProductExceptSelf(int[] nums)
+    {
+        if (nums.Length == 2)
+        {
+            return [nums[1], nums[0]];
+        }
+
+        var result = new int[nums.Length];
+        var product = 1;
+        
+        for (var i = 0; i < nums.Length; i++)
+        {
+            result[i] = product;
+            product *= nums[i];
+        }
+
+        product = 1;
+
+        for (var i = nums.Length - 1; i >= 0; i--)
+        {
+            result[i] *= product;
+            product *= nums[i];
+        }
+
+        return result;
+    }
 }
